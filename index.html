@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instagram運用代行サービス</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --color-primary: #2a2a2a;
@@ -510,6 +514,7 @@
                 opacity: 0;
                 transform: translateY(40px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -549,13 +554,13 @@
                 padding: 8rem 1.5rem 6rem;
                 min-height: 90vh;
             }
-            
+
             .hero h1 {
                 font-size: 2.2rem;
                 line-height: 1.3;
                 margin-bottom: 1.5rem;
             }
-            
+
             .hero p {
                 font-size: 1rem;
                 line-height: 1.6;
@@ -566,7 +571,7 @@
                 padding: 1rem 2.5rem;
                 font-size: 0.9rem;
             }
-            
+
             .services,
             .options,
             .plan-example,
@@ -584,7 +589,7 @@
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .service-card {
                 padding: 2.5rem 1.5rem;
             }
@@ -665,7 +670,7 @@
             .hero h1 {
                 font-size: 1.8rem;
             }
-            
+
             .hero p {
                 font-size: 0.9rem;
             }
@@ -681,7 +686,7 @@
             .contact {
                 padding: 4rem 1rem;
             }
-            
+
             .section-title {
                 font-size: 1.6rem;
                 margin-bottom: 2.5rem;
@@ -733,6 +738,7 @@
 
         /* モバイルでのタッチ最適化 */
         @media (hover: none) and (pointer: coarse) {
+
             .service-card:hover,
             .option-category:hover {
                 transform: none;
@@ -749,6 +755,7 @@
         }
     </style>
 </head>
+
 <body>
     <header id="header">
         <nav>
@@ -778,7 +785,7 @@
 
     <section class="hero">
         <div class="hero-content">
-          <h1>プロに任せる<br>インスタ運用</h1>
+            <h1>プロに任せる<br>インスタ運用</h1>
             <p>ブランドの本質的な価値を伝えます</p>
             <a href="#services" class="cta-button">VIEW SERVICE</a>
         </div>
@@ -860,7 +867,7 @@
                 <p class="plan-description">初期設定からコンテンツ制作、広告運用、分析まで。Instagram運用に必要な全てを包括的にサポートします。</p>
                 <div class="plan-price">¥200,000<span style="font-size: 1.5rem; font-weight: 400;">〜</span></div>
                 <div class="plan-price-note">Monthly / 内容により調整</div>
-                
+
                 <div class="plan-features">
                     <ul>
                         <li>初期設定（プロフィール整理）</li>
@@ -924,15 +931,15 @@
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
+
             if (scrollTop > 100) {
                 header.classList.add('header-scrolled');
             } else {
                 header.classList.remove('header-scrolled');
             }
-            
+
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, {passive: true});
+        }, { passive: true });
 
         // Intersection Observer for fade-in animations
         const observerOptions = {
@@ -962,7 +969,7 @@
                 if (target) {
                     const headerHeight = document.getElementById('header').offsetHeight;
                     const targetPosition = target.offsetTop - headerHeight - 20;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
@@ -973,29 +980,29 @@
 
         // Parallax effect for hero section (デスクトップのみ)
         let ticking = false;
-        
+
         function updateParallax() {
             if (window.innerWidth > 768) {
                 const scrolled = window.pageYOffset;
                 const parallax = document.querySelector('.hero');
                 const speed = scrolled * 0.3;
-                
+
                 if (parallax) {
                     parallax.style.transform = `translateY(${speed}px)`;
                 }
             }
-            
+
             ticking = false;
         }
-        
+
         function requestTick() {
             if (!ticking) {
                 requestAnimationFrame(updateParallax);
                 ticking = true;
             }
         }
-        
-        window.addEventListener('scroll', requestTick, {passive: true});
+
+        window.addEventListener('scroll', requestTick, { passive: true });
 
         // Preload critical resources
         const preloadFont = () => {
@@ -1025,4 +1032,5 @@
         });
     </script>
 </body>
+
 </html>
