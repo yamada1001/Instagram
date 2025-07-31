@@ -1,125 +1,89 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram運用代行サービス</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <title>OPERATION AGENCY</title>
     <style>
-        :root {
-            --color-primary: #2a2a2a;
-            --color-secondary: #666666;
-            --color-accent: #f5f5f5;
-            --color-background: #fafafa;
-            --color-white: #ffffff;
-            --color-border: #e5e5e5;
-            --color-text-light: #999999;
-            --font-primary: 'Inter', 'Noto Sans JP', sans-serif;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            overflow-x: hidden;
-        }
-
         body {
-            font-family: var(--font-primary);
-            line-height: 1.7;
-            color: var(--color-primary);
-            background-color: var(--color-background);
-            letter-spacing: 0.5px;
-            font-weight: 400;
-            overflow-x: hidden;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f6f3;
         }
 
-        /* ヘッダー */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid var(--color-border);
-            padding: 1.5rem 0;
+        /* Header */
+        .header {
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
+            background: rgba(248, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .header-scrolled {
             padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
         }
 
-        nav {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
             padding: 0 2rem;
-            position: relative;
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: var(--color-primary);
-            letter-spacing: 2px;
-            z-index: 1001;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .nav-links {
+        .nav-menu {
             display: flex;
             list-style: none;
-            gap: 3rem;
+            gap: 2rem;
         }
 
-        .nav-links a {
-            color: var(--color-secondary);
+        .nav-menu a {
             text-decoration: none;
-            font-weight: 400;
-            font-size: 0.95rem;
+            color: #333;
+            font-weight: 500;
             transition: color 0.3s ease;
-            letter-spacing: 0.5px;
         }
 
-        .nav-links a:hover {
-            color: var(--color-primary);
+        .nav-menu a:hover {
+            color: #d4a574;
         }
 
-        /* ハンバーガーメニューボタン */
+        /* ハンバーガーメニュー */
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            width: 24px;
-            height: 24px;
-            justify-content: space-between;
-            z-index: 1001;
+            padding: 5px;
         }
 
         .hamburger span {
-            display: block;
-            height: 2px;
-            width: 100%;
-            background: var(--color-primary);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform-origin: center;
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
         }
 
         .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(-45deg) translate(-5px, 6px);
         }
 
         .hamburger.active span:nth-child(2) {
@@ -127,838 +91,640 @@
         }
 
         .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+            transform: rotate(45deg) translate(-5px, -6px);
         }
 
         /* モバイルメニュー */
         .mobile-menu {
-            display: none;
             position: fixed;
             top: 0;
-            left: 0;
+            right: -100%;
             width: 100%;
             height: 100vh;
-            background: var(--color-white);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-menu-content {
+            background: rgba(248, 246, 243, 0.98);
+            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100%;
-            gap: 3rem;
-            padding: 0 2rem;
+            transition: right 0.3s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-menu li {
+            margin: 2rem 0;
         }
 
         .mobile-menu a {
-            color: var(--color-primary);
             text-decoration: none;
+            color: #333;
             font-size: 1.5rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .mobile-menu a:hover {
-            color: var(--color-secondary);
+            color: #d4a574;
         }
 
-        /* ヒーローセクション */
+        .close-menu {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* SVGアイコンのスタイル */
+        .icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+        }
+
+        .small-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Hero Section */
         .hero {
-            background: var(--color-white);
-            padding: 12rem 2rem 8rem;
-            text-align: center;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #f8f6f3 0%, #e8e4df 100%);
         }
 
         .hero-content {
+            text-align: center;
             max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
+            padding: 0 2rem;
         }
 
         .hero h1 {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #333;
             font-weight: 300;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            color: var(--color-primary);
-            letter-spacing: -1px;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease 0.3s forwards;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #d4a574;
+            font-weight: bold;
         }
 
         .hero p {
             font-size: 1.2rem;
-            color: var(--color-secondary);
-            margin-bottom: 3rem;
-            font-weight: 400;
-            line-height: 1.8;
-            letter-spacing: 0.3px;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease 0.6s forwards;
+            margin-bottom: 2rem;
+            color: #666;
         }
 
         .cta-button {
             display: inline-block;
-            background: var(--color-primary);
-            color: var(--color-white);
-            padding: 1.2rem 3rem;
-            border: none;
+            padding: 1rem 2rem;
+            background-color: #333;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
             font-weight: 500;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            cursor: pointer;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease 0.9s forwards;
+            transition: all 0.3s ease;
         }
 
         .cta-button:hover {
-            background: var(--color-secondary);
+            background-color: #d4a574;
             transform: translateY(-2px);
         }
 
-        /* サービスセクション */
-        .services {
-            padding: 8rem 2rem;
-            background: var(--color-white);
-        }
-
-        .container {
+        /* Sections */
+        .section {
+            padding: 5rem 0;
             max-width: 1200px;
             margin: 0 auto;
-            width: 100%;
+            padding-left: 2rem;
+            padding-right: 2rem;
         }
 
-        .section-title {
-            text-align: center;
+        .section h2 {
             font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #333;
             font-weight: 300;
-            margin-bottom: 5rem;
-            color: var(--color-primary);
-            letter-spacing: -0.5px;
         }
 
+        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-            width: 100%;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         .service-card {
-            background: var(--color-white);
-            padding: 3rem 2rem;
-            border: 1px solid var(--color-border);
-            text-align: left;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            width: 100%;
-            box-sizing: border-box;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
         }
 
         .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            border-color: var(--color-secondary);
         }
 
         .service-card h3 {
-            font-size: 1.6rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-            color: var(--color-primary);
-            letter-spacing: 0.5px;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
         }
 
         .service-card p {
-            color: var(--color-secondary);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            text-align: left;
         }
 
         .price {
-            font-size: 2.2rem;
-            font-weight: 300;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #d4a574;
         }
 
-        .price-note {
-            font-size: 0.9rem;
-            color: var(--color-text-light);
-            font-weight: 400;
-        }
-
-        /* オプションサービスセクション */
-        .options {
-            padding: 8rem 2rem;
-            background: var(--color-accent);
-        }
-
+        /* Options Grid */
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 4rem;
-            width: 100%;
+            margin-bottom: 3rem;
         }
 
-        .option-category {
-            background: var(--color-white);
-            padding: 2.5rem 2rem;
-            border: 1px solid var(--color-border);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .option-category:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
-        }
-
-        .option-category h3 {
-            font-size: 1.4rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            color: var(--color-primary);
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--color-border);
-            padding-bottom: 1rem;
-        }
-
-        .option-list {
-            list-style: none;
-        }
-
-        .option-list li {
-            color: var(--color-secondary);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            position: relative;
-            padding-left: 1rem;
-        }
-
-        .option-list li::before {
-            content: "•";
-            color: var(--color-primary);
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        /* プラン例セクション */
-        .plan-example {
-            padding: 8rem 2rem;
-            background: var(--color-white);
+        .option-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             text-align: center;
         }
 
-        .plan-card {
-            max-width: 800px;
-            margin: 4rem auto 0;
-            background: var(--color-white);
-            padding: 3rem 2rem;
-            border: 2px solid var(--color-primary);
+        .option-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .option-card ul {
+            list-style: none;
+            color: #666;
+            text-align: left;
+        }
+
+        .option-card li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
             position: relative;
-            width: 100%;
-            box-sizing: border-box;
         }
 
-        .plan-badge {
+        .option-card li::before {
+            content: "•";
+            color: #d4a574;
             position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--color-primary);
-            color: var(--color-white);
-            padding: 0.5rem 2rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 1px;
+            left: 0;
         }
 
-        .plan-title {
-            font-size: 1.8rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            color: var(--color-primary);
+        /* Plan Section */
+        .plan-card {
+            background: linear-gradient(135deg, #333 0%, #555 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .plan-description {
-            color: var(--color-secondary);
+        .recommended-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #d4a574;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .plan-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-card p {
             margin-bottom: 2rem;
-            line-height: 1.8;
+            opacity: 0.9;
         }
 
         .plan-price {
-            font-size: 3rem;
-            font-weight: 300;
-            color: var(--color-primary);
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-        }
-
-        .plan-price-note {
-            color: var(--color-text-light);
-            font-size: 0.9rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #d4a574;
             margin-bottom: 2rem;
         }
 
         .plan-features {
-            text-align: left;
-            margin-top: 2rem;
-        }
-
-        .plan-features ul {
             list-style: none;
-            color: var(--color-secondary);
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
         }
 
         .plan-features li {
             margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
-            font-size: 0.95rem;
         }
 
         .plan-features li::before {
             content: "✓";
+            color: #d4a574;
             position: absolute;
             left: 0;
-            color: var(--color-primary);
-            font-weight: 600;
+            font-weight: bold;
         }
 
-        /* 連絡先セクション */
+        /* Contact Section */
         .contact {
-            padding: 6rem 2rem;
-            background: var(--color-accent);
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
             text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .contact h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            color: var(--color-primary);
-            letter-spacing: -0.5px;
+        .contact h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
         }
 
         .contact p {
-            color: var(--color-secondary);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #666;
         }
 
-        .email-link {
-            display: inline-block;
-            font-size: 1.3rem;
-            color: var(--color-primary);
+        .contact a {
+            color: #d4a574;
             text-decoration: none;
+            font-size: 1.2rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
-            padding: 1rem 0;
-            border-bottom: 2px solid var(--color-primary);
-            transition: all 0.3s ease;
-            word-break: break-all;
         }
 
-        .email-link:hover {
-            color: var(--color-secondary);
-            border-bottom-color: var(--color-secondary);
-            transform: translateY(-2px);
+        .contact a:hover {
+            text-decoration: underline;
         }
 
-        /* フッター */
-        footer {
-            background: var(--color-primary);
-            color: var(--color-white);
+        /* Footer */
+        .footer {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2rem;
+            color: #666;
             font-size: 0.9rem;
-            font-weight: 400;
-            letter-spacing: 0.5px;
         }
 
-        /* アニメーション */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* レスポンシブ */
+        /* Responsive */
         @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
             .hamburger {
                 display: flex;
             }
 
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            nav {
-                padding: 0 1.5rem;
-            }
-
-            .hero {
-                padding: 8rem 1.5rem 6rem;
-                min-height: 90vh;
-            }
-
             .hero h1 {
-                font-size: 2.2rem;
-                line-height: 1.3;
-                margin-bottom: 1.5rem;
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
             }
 
             .hero p {
                 font-size: 1rem;
-                line-height: 1.6;
-                margin-bottom: 2.5rem;
             }
 
-            .cta-button {
-                padding: 1rem 2.5rem;
-                font-size: 0.9rem;
+            .section {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 3rem;
+                padding-bottom: 3rem;
             }
 
-            .services,
-            .options,
-            .plan-example,
-            .contact {
-                padding: 5rem 1.5rem;
+            .section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
             }
 
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                margin-top: 3rem;
-            }
-
+            .services-grid,
             .options-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .service-card {
-                padding: 2.5rem 1.5rem;
-            }
-
-            .option-category {
-                padding: 2rem 1.5rem;
             }
 
             .plan-card {
-                padding: 2.5rem 1.5rem;
-                margin-top: 3rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 3rem;
-            }
-
-            .service-card h3 {
-                font-size: 1.3rem;
-            }
-
-            .service-card p {
-                font-size: 0.95rem;
-            }
-
-            .price {
-                font-size: 1.6rem;
+                padding: 2rem;
             }
 
             .plan-price {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
-            .contact h2 {
-                font-size: 1.8rem;
-            }
-
-            .contact p {
-                font-size: 0.95rem;
-            }
-
-            .email-link {
-                font-size: 1rem;
-            }
-
-            .logo {
-                font-size: 1.1rem;
-                letter-spacing: 1.5px;
-            }
-
-            .mobile-menu a {
-                font-size: 1.3rem;
-            }
-
-            .option-category h3 {
-                font-size: 1.2rem;
-            }
-
-            .plan-title {
-                font-size: 1.5rem;
-            }
-
-            .plan-description {
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav {
-                padding: 0 1rem;
-            }
-
-            .hero {
-                padding: 7rem 1rem 5rem;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 0.9rem;
-            }
-
-            .cta-button {
-                padding: 0.9rem 2rem;
-                font-size: 0.85rem;
-            }
-
-            .services,
-            .options,
-            .plan-example,
             .contact {
-                padding: 4rem 1rem;
+                padding: 2rem;
             }
 
-            .section-title {
-                font-size: 1.6rem;
-                margin-bottom: 2.5rem;
+            .icon {
+                width: 50px;
+                height: 50px;
             }
 
-            .service-card {
-                padding: 2rem 1rem;
-            }
-
-            .option-category {
-                padding: 1.5rem 1rem;
-            }
-
-            .plan-card {
-                padding: 2rem 1rem;
-            }
-
-            .logo {
-                font-size: 1rem;
-                letter-spacing: 1px;
-            }
-
-            .mobile-menu a {
-                font-size: 1.2rem;
-            }
-
-            .email-link {
-                font-size: 0.9rem;
+            .hero-icon {
+                width: 60px;
+                height: 60px;
             }
         }
 
-        /* スクロールバーのカスタマイズ */
-        ::-webkit-scrollbar {
-            width: 6px;
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--color-accent);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--color-secondary);
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--color-primary);
-        }
-
-        /* モバイルでのタッチ最適化 */
-        @media (hover: none) and (pointer: coarse) {
-
-            .service-card:hover,
-            .option-category:hover {
-                transform: none;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-            }
-
-            .email-link:hover {
-                transform: none;
-            }
-
-            .cta-button:hover {
-                transform: none;
-            }
+        /* Body lock when mobile menu is open */
+        body.menu-open {
+            overflow: hidden;
         }
     </style>
 </head>
-
 <body>
-    <header id="header">
-        <nav>
-            <div class="logo">OPERATION AGENCY</div>
-            <ul class="nav-links">
-                <li><a href="#services">SERVICE</a></li>
-                <li><a href="#options">OPTION</a></li>
-                <li><a href="#plan">PLAN</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg class="small-icon" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="#d4a574" stroke-width="2"/>
+                    <path d="M8 12l2 2 4-4" stroke="#d4a574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                OPERATION AGENCY
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#services">SERVICE</a></li>
+                    <li><a href="#options">OPTION</a></li>
+                    <li><a href="#plan">PLAN</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-        </nav>
+        </div>
     </header>
 
+    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-content">
-            <a href="#services" class="mobile-menu-link">SERVICE</a>
-            <a href="#options" class="mobile-menu-link">OPTION</a>
-            <a href="#plan" class="mobile-menu-link">PLAN</a>
-            <a href="#contact" class="mobile-menu-link">CONTACT</a>
-        </div>
+        <div class="close-menu" id="closeMenu">&times;</div>
+        <ul>
+            <li><a href="#services" class="mobile-link">SERVICE</a></li>
+            <li><a href="#options" class="mobile-link">OPTION</a></li>
+            <li><a href="#plan" class="mobile-link">PLAN</a></li>
+            <li><a href="#contact" class="mobile-link">CONTACT</a></li>
+        </ul>
     </div>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>プロに任せる<br>インスタ運用</h1>
+            <svg class="hero-icon" viewBox="0 0 100 100" fill="none">
+                <rect x="10" y="10" width="80" height="80" rx="20" stroke="#d4a574" stroke-width="3" fill="none"/>
+                <circle cx="30" cy="30" r="8" fill="#d4a574"/>
+                <rect x="45" y="25" width="35" height="4" fill="#d4a574" rx="2"/>
+                <rect x="45" y="32" width="25" height="3" fill="#d4a574" rx="1.5"/>
+                <rect x="20" y="45" width="60" height="3" fill="#d4a574" rx="1.5"/>
+                <rect x="20" y="52" width="50" height="3" fill="#d4a574" rx="1.5"/>
+                <rect x="20" y="65" width="30" height="8" fill="#d4a574" rx="4"/>
+                <rect x="55" y="65" width="25" height="8" fill="#333" rx="4"/>
+            </svg>
+            <h1>プロに任せる</h1>
+            <h2>インスタ運用</h2>
             <p>ブランドの本質的な価値を伝えます</p>
             <a href="#services" class="cta-button">VIEW SERVICE</a>
         </div>
     </section>
 
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title fade-in">BASIC SERVICE</h2>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <h3>Feed Post</h3>
-                    <p>ブランドの世界観を統一されたビジュアルで表現。フィード投稿を継続的に制作し、フォロワーとの深いエンゲージメントを構築します。</p>
-                    <div class="price">¥6,000<span style="font-size: 1.2rem; font-weight: 400;">〜</span></div>
-                    <div class="price-note">1投稿</div>
-                </div>
-                <div class="service-card fade-in">
-                    <h3>Reel Production</h3>
-                    <p>ブランドストーリーを効果的に伝える高品質なリール動画で、新しい顧客層にリーチします。</p>
-                    <div class="price">¥14,000<span style="font-size: 1.2rem; font-weight: 400;">〜</span></div>
-                    <div class="price-note">1投稿</div>
-                </div>
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <h2>BASIC SERVICE</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <svg class="icon" viewBox="0 0 100 100" fill="none">
+                    <rect x="15" y="15" width="70" height="70" rx="15" stroke="#d4a574" stroke-width="3" fill="none"/>
+                    <rect x="25" y="25" width="50" height="30" fill="#d4a574" rx="5"/>
+                    <rect x="30" y="60" width="15" height="3" fill="#d4a574" rx="1.5"/>
+                    <rect x="30" y="65" width="25" height="3" fill="#d4a574" rx="1.5"/>
+                    <rect x="30" y="70" width="20" height="3" fill="#d4a574" rx="1.5"/>
+                    <circle cx="70" cy="67" r="6" stroke="#d4a574" stroke-width="2" fill="none"/>
+                    <path d="M67 67l2 2 4-4" stroke="#d4a574" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <h3>Feed Post</h3>
+                <p>ブランドの世界観を統一されたビジュアルで表現。フィード投稿を継続的に制作し、フォロワーとの深いエンゲージメントを構築します。</p>
+                <div class="price">¥6,000〜<br><small>1投稿</small></div>
+            </div>
+            <div class="service-card">
+                <svg class="icon" viewBox="0 0 100 100" fill="none">
+                    <rect x="15" y="15" width="70" height="70" rx="15" stroke="#d4a574" stroke-width="3" fill="none"/>
+                    <polygon points="35,35 35,65 65,50" fill="#d4a574"/>
+                    <circle cx="25" cy="25" r="3" fill="#d4a574"/>
+                    <circle cx="75" cy="25" r="3" fill="#d4a574"/>
+                    <circle cx="25" cy="75" r="3" fill="#d4a574"/>
+                    <circle cx="75" cy="75" r="3" fill="#d4a574"/>
+                </svg>
+                <h3>Reel Production</h3>
+                <p>ブランドストーリーを効果的に伝える高品質なリール動画で、新しい顧客層にリーチします。</p>
+                <div class="price">¥14,000〜<br><small>1投稿</small></div>
             </div>
         </div>
     </section>
 
-    <section class="options" id="options">
-        <div class="container">
-            <h2 class="section-title fade-in">OPTIONAL SERVICE</h2>
-            <div class="options-grid">
-                <div class="option-category fade-in">
-                    <h3>Advertising</h3>
-                    <ul class="option-list">
-                        <li>広告出稿代行</li>
-                        <li>出稿後のデータ分析</li>
-                        <li>パフォーマンス最適化</li>
-                        <li>ターゲティング調整</li>
-                    </ul>
-                </div>
-
-                <div class="option-category fade-in">
-                    <h3>Stories</h3>
-                    <ul class="option-list">
-                        <li>ストーリーズ制作</li>
-                        <li>インタラクティブスタンプ設計</li>
-                        <li>エンゲージメント施策</li>
-                    </ul>
-                </div>
-
-                <div class="option-category fade-in">
-                    <h3>Initial Setup</h3>
-                    <ul class="option-list">
-                        <li>プロフィール情報の最適化</li>
-                        <li>カテゴリ・連絡先設定</li>
-                        <li>ハイライト設定</li>
-                        <li>全体戦略設計</li>
-                    </ul>
-                </div>
-
-                <div class="option-category fade-in">
-                    <h3>Report & Shooting</h3>
-                    <ul class="option-list">
-                        <li>月次レポート作成</li>
-                        <li>定例ミーティング（月2回・各1時間）</li>
-                        <li>企画案の提案</li>
-                        <li>キャンペーン企画・運営</li>
-                        <li>現地撮影（静止画・動画）</li>
-                    </ul>
-                </div>
+    <!-- Options Section -->
+    <section id="options" class="section">
+        <h2>OPTIONAL SERVICE</h2>
+        <div class="options-grid">
+            <div class="option-card">
+                <svg class="icon" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="30" stroke="#d4a574" stroke-width="3" fill="none"/>
+                    <path d="M35 45 L45 55 L65 35" stroke="#d4a574" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 30 L30 20 M70 20 L80 30 M80 70 L70 80 M30 80 L20 70" stroke="#d4a574" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <h4>Advertising</h4>
+                <ul>
+                    <li>広告出稿代行</li>
+                    <li>出稿後のデータ分析</li>
+                    <li>パフォーマンス最適化</li>
+                    <li>ターゲティング調整</li>
+                </ul>
+            </div>
+            <div class="option-card">
+                <svg class="icon" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="35" stroke="#d4a574" stroke-width="3" fill="none"/>
+                    <circle cx="50" cy="35" r="8" fill="#d4a574"/>
+                    <rect x="45" y="48" width="10" height="20" fill="#d4a574" rx="5"/>
+                    <path d="M30 75 Q50 65 70 75" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+                <h4>Stories</h4>
+                <ul>
+                    <li>ストーリーズ制作</li>
+                    <li>インタラクティブスタンプ設計</li>
+                    <li>エンゲージメント施策</li>
+                </ul>
+            </div>
+            <div class="option-card">
+                <svg class="icon" viewBox="0 0 100 100" fill="none">
+                    <rect x="20" y="30" width="60" height="40" rx="5" stroke="#d4a574" stroke-width="3" fill="none"/>
+                    <path d="M30 40 L45 50 L70 40" stroke="#d4a574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="50" cy="20" r="8" stroke="#d4a574" stroke-width="2" fill="none"/>
+                    <path d="M47 17 L50 20 L53 17" stroke="#d4a574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h4>Initial Setup</h4>
+                <ul>
+                    <li>プロフィール情報の最適化</li>
+                    <li>カテゴリ・連絡先設定</li>
+                    <li>ハイライト設定</li>
+                    <li>全体戦略設計</li>
+                </ul>
+            </div>
+            <div class="option-card">
+                <svg class="icon" viewBox="0 0 100 100" fill="none">
+                    <rect x="15" y="25" width="70" height="50" rx="5" stroke="#d4a574" stroke-width="3" fill="none"/>
+                    <rect x="25" y="35" width="30" height="3" fill="#d4a574"/>
+                    <rect x="25" y="42" width="25" height="3" fill="#d4a574"/>
+                    <rect x="25" y="49" width="35" height="3" fill="#d4a574"/>
+                    <rect x="25" y="56" width="20" height="3" fill="#d4a574"/>
+                    <circle cx="70" cy="45" r="8" stroke="#d4a574" stroke-width="2" fill="none"/>
+                    <circle cx="70" cy="45" r="3" fill="#d4a574"/>
+                </svg>
+                <h4>Report & Shooting</h4>
+                <ul>
+                    <li>月次レポート作成</li>
+                    <li>定例ミーティング（月2回・各1時間）</li>
+                    <li>企画案の提案</li>
+                    <li>キャンペーン企画・運営</li>
+                    <li>現地撮影（静止画・動画）</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section class="plan-example" id="plan">
-        <div class="container">
-            <h2 class="section-title fade-in">COMPREHENSIVE PLAN</h2>
-            <div class="plan-card fade-in">
-                <div class="plan-badge">RECOMMENDED</div>
-                <h3 class="plan-title">フルサポートプラン</h3>
-                <p class="plan-description">初期設定からコンテンツ制作、広告運用、分析まで。Instagram運用に必要な全てを包括的にサポートします。</p>
-                <div class="plan-price">¥200,000<span style="font-size: 1.5rem; font-weight: 400;">〜</span></div>
-                <div class="plan-price-note">Monthly / 内容により調整</div>
-
-                <div class="plan-features">
-                    <ul>
-                        <li>初期設定（プロフィール整理）</li>
-                        <li>フィード投稿 月4本</li>
-                        <li>リール制作 月8本</li>
-                        <li>ストーリーズ 月30本</li>
-                        <li>広告運用代行</li>
-                        <li>月次レポート作成</li>
-                        <li>定例ミーティング（月2回）</li>
-                        <li>企画提案・戦略策定</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Plan Section -->
+    <section id="plan" class="section">
+        <h2>COMPREHENSIVE PLAN</h2>
+        <div class="plan-card">
+            <div class="recommended-badge">RECOMMENDED</div>
+            <svg class="icon" viewBox="0 0 100 100" fill="none" style="margin-bottom: 1rem;">
+                <rect x="10" y="20" width="80" height="60" rx="10" stroke="#d4a574" stroke-width="3" fill="none"/>
+                <path d="M25 35 L40 45 L75 35" stroke="#d4a574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="30" cy="55" r="4" fill="#d4a574"/>
+                <circle cx="50" cy="55" r="4" fill="#d4a574"/>
+                <circle cx="70" cy="55" r="4" fill="#d4a574"/>
+                <rect x="25" y="65" width="50" height="3" fill="#d4a574" rx="1.5"/>
+                <path d="M40 10 L50 20 L60 10" stroke="#d4a574" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>フルサポートプラン</h3>
+            <p>初期設定からコンテンツ制作、広告運用、分析まで。Instagram運用に必要な全てを包括的にサポートします。</p>
+            <div class="plan-price">¥200,000〜<br><small>Monthly / 内容により調整</small></div>
+            <ul class="plan-features">
+                <li>初期設定（プロフィール整理）</li>
+                <li>フィード投稿 月4本</li>
+                <li>リール制作 月8本</li>
+                <li>ストーリーズ 月30本</li>
+                <li>広告運用代行</li>
+                <li>月次レポート作成</li>
+                <li>定例ミーティング（月2回）</li>
+                <li>企画提案・戦略策定</li>
+            </ul>
         </div>
     </section>
 
-    <section class="contact" id="contact">
-        <div class="contact-content fade-in">
-            <h2>CONTACT</h2>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="contact">
+            <svg class="icon" viewBox="0 0 100 100" fill="none" style="margin-bottom: 1rem;">
+                <rect x="15" y="25" width="70" height="50" rx="5" stroke="#d4a574" stroke-width="3" fill="none"/>
+                <path d="M15 35 L50 55 L85 35" stroke="#d4a574" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="25" cy="65" r="3" fill="#d4a574"/>
+                <circle cx="75" cy="65" r="3" fill="#d4a574"/>
+            </svg>
+            <h3>CONTACT</h3>
             <p>サービスに関するご質問・ご相談は<br>お気軽にメールでお問い合わせください</p>
-            <a href="mailto:yamada1881r@gmail.com" class="email-link">yamada1881r@gmail.com</a>
+            <a href="mailto:yamada1881r@gmail.com">yamada1881r@gmail.com</a>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 OPERATION AGENCY. ALL RIGHTS RESERVED.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 OPERATION AGENCY. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
         // ハンバーガーメニューの制御
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const body = document.body;
 
-        hamburger.addEventListener('click', () => {
+        // ハンバーガーメニューを開く
+        hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            body.classList.toggle('menu-open');
         });
 
-        // モバイルメニューのリンククリック時の処理
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
+        // メニューを閉じる（×ボタン）
+        closeMenu.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+
+        // メニューリンクをクリックしたときにメニューを閉じる
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
+                body.classList.remove('menu-open');
             });
-        });
-
-        // モバイルメニューの背景クリックで閉じる
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // ヘッダーのスクロール効果
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > 100) {
-                header.classList.add('header-scrolled');
-            } else {
-                header.classList.remove('header-scrolled');
-            }
-
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, { passive: true });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -30px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
         });
 
         // Smooth scrolling for navigation links
@@ -967,70 +733,46 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const headerHeight = document.getElementById('header').offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight - 20;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
         });
 
-        // Parallax effect for hero section (デスクトップのみ)
-        let ticking = false;
-
-        function updateParallax() {
-            if (window.innerWidth > 768) {
-                const scrolled = window.pageYOffset;
-                const parallax = document.querySelector('.hero');
-                const speed = scrolled * 0.3;
-
-                if (parallax) {
-                    parallax.style.transform = `translateY(${speed}px)`;
-                }
+        // Header background opacity on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(248, 246, 243, 0.98)';
+            } else {
+                header.style.background = 'rgba(248, 246, 243, 0.95)';
             }
+        });
 
-            ticking = false;
-        }
-
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(updateParallax);
-                ticking = true;
-            }
-        }
-
-        window.addEventListener('scroll', requestTick, { passive: true });
-
-        // Preload critical resources
-        const preloadFont = () => {
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.as = 'font';
-            link.type = 'font/woff2';
-            link.crossOrigin = 'anonymous';
-            link.href = 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2';
-            document.head.appendChild(link);
+        // Add animation to cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
 
-        // Initialize preloading
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', preloadFont);
-        } else {
-            preloadFont();
-        }
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
 
-        // Resize handler for responsive adjustments
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+        // Observe all cards
+        document.querySelectorAll('.service-card, .option-card, .plan-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
         });
     </script>
 </body>
-
 </html>
